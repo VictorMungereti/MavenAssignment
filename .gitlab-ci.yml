@@ -1,0 +1,31 @@
+stages:
+  - build
+  - test
+  - package
+
+# Build Stage
+build_job:
+  stage: build
+  image: maven:3.9.6-eclipse-temurin-17
+  script:
+    - echo "Building the calculator project..."
+    - mvn clean compile
+
+# Test Stage
+test_job:
+  stage: test
+  image: maven:3.9.6-eclipse-temurin-17
+  script:
+    - echo "Running unit tests for the calculator..."
+    - mvn test
+
+# Package Stage
+package_job:
+  stage: package
+  image: maven:3.9.6-eclipse-temurin-17
+  script:
+    - echo "Packaging the calculator into a JAR..."
+    - mvn package
+  artifacts:
+    paths:
+      - target/*.jar
